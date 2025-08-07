@@ -19,7 +19,8 @@ from typing import Any
 
 import aiohttp
 from pydantic import BaseModel
-from scripts.config import get_config
+
+from app.config import get_settings
 
 
 class ModuleMetadata(BaseModel):
@@ -48,8 +49,8 @@ class ModuleRegistryClient:
         # Use environment variable or default
         if not ipfs_api_url:
             # Auto-detect from environment or use default
-            config = get_config()
-            ipfs_api_url = config.commune_ipfs.base_url
+            settings = get_settings()
+            ipfs_api_url = settings.ipfs_api_url
         self.ipfs_api_url = ipfs_api_url.rstrip("/")
         self.substrate_rpc_url = substrate_rpc_url
         self.session: aiohttp.ClientSession | None = None

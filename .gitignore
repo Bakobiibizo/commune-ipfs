@@ -22,7 +22,6 @@ ipfs_data/
 *.ipfs
 .ipfs_repo/
 repo/
-api
 swarm.key
 kubo/
 go-ipfs/

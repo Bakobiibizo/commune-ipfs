@@ -30,7 +30,7 @@ repos:
     -   id: black
         name: black (python)
         language: system
-        entry: bash -c 'if command -v black >/dev/null 2>&1; then black --line-length=88 "$@"; elif command -v uv >/dev/null 2>&1; then uv run black --line-length=88 "$@"; else echo "black not found, skipping formatting"; fi'
+        entry: uv run black --line-length=88
         types: [python]
         files: \.(py|pyi|pyx|pxd)$
         exclude: |
@@ -74,7 +74,7 @@ repos:
     -   id: isort
         name: isort (python)
         language: system
-        entry: bash -c 'if command -v isort >/dev/null 2>&1; then isort --profile=black "$@"; elif command -v uv >/dev/null 2>&1; then uv run isort --profile=black "$@"; else echo "isort not found, skipping import sorting"; fi'
+        entry: uv run isort --profile=black
         types: [python]
         files: \.(py|pyi|pyx|pxd)$
         exclude: |
@@ -96,7 +96,7 @@ repos:
     hooks:
     -   id: mypy
         name: mypy (type checking)
-        entry: bash -c 'if command -v mypy >/dev/null 2>&1; then mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent --disable-error-code=return-value --disable-error-code=no-any-return --disable-error-code=arg-type .; elif command -v uv >/dev/null 2>&1; then uv run mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent --disable-error-code=return-value --disable-error-code=no-any-return --disable-error-code=arg-type .; else echo "mypy not found, skipping type checking"; fi'
+        entry: uv run mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent --disable-error-code=return-value --disable-error-code=no-any-return --disable-error-code=arg-type .
         language: system
         types: [python]
         pass_filenames: false
@@ -105,7 +105,7 @@ repos:
 
     -   id: pytest-basic
         name: pytest (basic tests only)
-        entry: bash -c 'if command -v pytest >/dev/null 2>&1; then pytest --tb=short -x app/tests/ || true; elif command -v uv >/dev/null 2>&1; then uv run pytest --tb=short -x app/tests/ || true; else echo "pytest not found, skipping tests"; fi'
+        entry: bash -c "uv run pytest --tb=short -x tests/ || true"
         language: system
         types: [python]
         pass_filenames: false
