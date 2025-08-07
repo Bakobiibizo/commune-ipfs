@@ -105,7 +105,7 @@ repos:
 
     -   id: pytest-basic
         name: pytest (basic tests only)
-        entry: uv run pytest --tb=short -x tests/ || true
+        entry: bash -c "uv run pytest --tb=short -x tests/ || true"
         language: system
         types: [python]
         pass_filenames: false

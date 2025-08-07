@@ -1,5 +1,5 @@
 [project]
-name = "ipfs-storage"
+name = "commune-ipfs"
 version = "0.0.1"
 description = "IPFS-based distributed file storage system with FastAPI backend and web interface"
 readme = "README.md"
